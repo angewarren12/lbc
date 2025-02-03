@@ -3,13 +3,13 @@ session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     // Récupération des données du formulaire
-    $firstName = filter_input(INPUT_POST, 'firstName', FILTER_SANITIZE_STRING);
-    $lastName = filter_input(INPUT_POST, 'lastName', FILTER_SANITIZE_STRING);
-    $birthDate = filter_input(INPUT_POST, 'naissance', FILTER_SANITIZE_STRING);
-    $address = filter_input(INPUT_POST, 'addre', FILTER_SANITIZE_STRING);
-    $postalCode = filter_input(INPUT_POST, 'posta', FILTER_SANITIZE_STRING);
-    $city = filter_input(INPUT_POST, 'cityName', FILTER_SANITIZE_STRING);
-    $phone = filter_input(INPUT_POST, 'tel', FILTER_SANITIZE_STRING);
+    $firstName = $_POST['firstName'];
+    $lastName = $_POST['lastName'];
+    $birthDate = $_POST['naissance'];
+    $address = $_POST['addre'];
+    $postalCode =$_POST['posta'];
+    $city = $_POST['cityName'];
+    $phone = $_POST['tel'];
 
     // Validation des champs
     if ($firstName && $lastName && $birthDate && $address && $postalCode && $city && $phone) {
