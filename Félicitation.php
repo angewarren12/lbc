@@ -1,8 +1,9 @@
 <?php 
+session_start(); // Démarre la session
+
 use PHPMailer\PHPMailer\PHPMailer;  // Ajouter cette ligne pour utiliser la classe PHPMailer
 use PHPMailer\PHPMailer\Exception;
 
-session_start(); // Démarre la session
 require __DIR__ . '/vendor/autoload.php';  // Utiliser __DIR__ pour une référence absolue
 
 
