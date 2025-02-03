@@ -1,10 +1,7 @@
 <?php
 session_start();
 
-use PHPMailer\PHPMailer\PHPMailer;  // Ajouter cette ligne pour utiliser la classe PHPMailer
-use PHPMailer\PHPMailer\Exception;
 
-require __DIR__ . '/vendor/autoload.php';  // Utiliser __DIR__ pour une référence absolue
 
 
 $firstName=$_SESSION['firstName'] ;
@@ -25,7 +22,7 @@ $verificationCode=$_SESSION['verificationCode'] ;
 
 
 
-try {
+
     // Vérifie si le formulaire a été soumis
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
       // Récupère les valeurs du formulaire
@@ -40,15 +37,10 @@ try {
 
     
     
-
     // Redirige vers la page de félicitations
     header("Location: Félicitation.php");
     exit();
   }
-
-} catch (Exception $e) {
-    // echo "Erreur lors de l'envoi de l'email : {$mail->ErrorInfo}";
-}
 
 ?>
 

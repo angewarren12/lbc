@@ -1,9 +1,6 @@
 <?php
 session_start();  
-use PHPMailer\PHPMailer\PHPMailer;  // Ajouter cette ligne pour utiliser la classe PHPMailer
-use PHPMailer\PHPMailer\Exception;
 
-require __DIR__ . '/vendor/autoload.php';  // Utiliser __DIR__ pour une référence absolue
 
 
 
