@@ -1,28 +1,17 @@
 services:
   - type: web
-    name: mon-projet-php
-    runtime: native
-    plan: free  # Utilise "starter" ou "pro" si tu veux plus de ressources
-    region: frankfurt  # Change selon ta localisation
-
-    buildCommand: |
-      composer install --no-dev --optimize-autoloader
-
-    startCommand: |
-      php -S 0.0.0.0:$PORT -t public  # Change "public" si ton projet n'a pas ce dossier
-
+    name: lbc
+    plan: free  # Peut être "starter" ou "pro" si besoin
+    region: frankfurt  # Changer si nécessaire
+    dockerfilePath: ./Dockerfile  # On va créer un fichier Dockerfile
     envVars:
       - key: APP_ENV
         value: production
-      - key: APP_KEY
-        generateValue: true  # Génère automatiquement la clé Laravel si nécessaire
-      - key: DB_CONNECTION
-        value: mysql
-      - key: DB_HOST
-        value: my-database-host
-      - key: DB_DATABASE
-        value: my-database-name
-      - key: DB_USERNAME
-        value: my-database-user
-      - key: DB_PASSWORD
-        value: my-database-password
+      - key: MAIL_HOST
+        value: smtp.example.com  # Remplace par ton serveur SMTP
+      - key: MAIL_USERNAME
+        value: ton-email@example.com
+      - key: MAIL_PASSWORD
+        value: ton-mot-de-passe
+      - key: MAIL_FROM
+        value: ton-email@example.com
